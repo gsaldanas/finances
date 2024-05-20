@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Crediteur{% endblock %}
+
+{% block body %}
+    <h1>Maak een nieuwe crediteur aan</h1>
+
+    {{ include('crediteur/_form.html.twig') }}
+
+    <a href="{{ path('app_crediteur_index') }}">Terug naar de lijst</a>
+{% endblock %}

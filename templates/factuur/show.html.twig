@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Factuur{% endblock %}
+
+{% block body %}
+    <h1>Factuur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ factuur.id }}</td>
+            </tr>
+            <tr>
+                <th>Referentie</th>
+                <td>{{ factuur.referentie }}</td>
+            </tr>
+            <tr>
+                <th>Datum</th>
+                <td>{{ factuur.datum ? factuur.datum|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Verval_datum</th>
+                <td>{{ factuur.vervalDatum ? factuur.vervalDatum|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Bedrag</th>
+                <td>{{ factuur.bedrag }}</td>
+            </tr>
+            <tr>
+                <th>Is_betaald</th>
+                <td>{{ factuur.isBetaald ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_factuur_index') }}">terug naar overzicht</a>
+
+    <a href="{{ path('app_factuur_edit', {'id': factuur.id}) }}">edit</a>
+
+    {{ include('factuur/_delete_form.html.twig') }}
+{% endblock %}

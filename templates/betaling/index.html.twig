@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Betaling index{% endblock %}
+
+{% block body %}
+    <h1>Betaling overzicht</h1>
+    <a href="{{ path('app_betaling_new') }}">Nieuw aanmaken</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Referentie</th>
+                <th>Datum</th>
+                <th>Bedrag</th>
+                <th>Rek_nr</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for betaling in betalings %}
+            <tr>
+                <td>{{ betaling.id }}</td>
+                <td>{{ betaling.referentie }}</td>
+                <td>{{ betaling.datum ? betaling.datum|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ betaling.bedrag }}</td>
+                <td>{{ betaling.rekNr }}</td>
+                <td>
+                    <a href="{{ path('app_betaling_show', {'id': betaling.id}) }}">bekijk</a>
+                    <a href="{{ path('app_betaling_edit', {'id': betaling.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

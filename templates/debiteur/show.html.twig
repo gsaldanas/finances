@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Debiteur{% endblock %}
+
+{% block body %}
+    <h1>Debiteur details</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ debiteur.id }}</td>
+            </tr>
+            <tr>
+                <th>Voornaam</th>
+                <td>{{ debiteur.voornaam }}</td>
+            </tr>
+            <tr>
+                <th>Naam</th>
+                <td>{{ debiteur.naam }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ debiteur.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ debiteur.email }}</td>
+            </tr>
+            <tr>
+                <th>Straat_nr</th>
+                <td>{{ debiteur.straatNr }}</td>
+            </tr>
+            <tr>
+                <th>Postcode</th>
+                <td>{{ debiteur.postcode }}</td>
+            </tr>
+            <tr>
+                <th>Gemeente</th>
+                <td>{{ debiteur.gemeente }}</td>
+            </tr>
+            <tr>
+                <th>Land</th>
+                <td>{{ debiteur.land }}</td>
+            </tr>
+            <tr>
+                <th>Btw_nr</th>
+                <td>{{ debiteur.btwNr }}</td>
+            </tr>
+            <tr>
+                <th>Rek_nr</th>
+                <td>{{ debiteur.rekNr }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ debiteur.updatedAt ? debiteur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Facturen</h2>
+    {% if debiteur.factuur is not empty %}
+        <ul>
+            {% for factuur in debiteur.factuur %}
+                <li>Factuurnummer: {{ factuur.referentie }}, Bedrag: {{ factuur.bedrag }}</li>
+               <a href="{{ path('app_factuur_show', {'id': factuur.id}) }}">Bekijk</a></td>
+                <!-- Voeg hier andere details van de factuur toe zoals datum, status, etc. -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Er zijn geen facturen gevonden voor deze debiteur.</p>
+    {% endif %}
+
+    <!-- Creditnota's -->
+    <h2>Creditnota's</h2>
+    {% if debiteur.creditnota is not empty %}
+        <ul>
+            {% for creditnota in debiteur.creditnota %}
+                <li>Creditnota nummer: {{ creditnota.referentie }}, Bedrag: {{ creditnota.bedrag }}</li>
+                <a href="{{ path('app_creditnota_show', {'id': creditnota.id}) }}">Bekijk</a></li>
+                <!-- Voeg hier andere details van de creditnota toe -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Er zijn geen creditnota's gevonden voor deze debiteur.</p>
+    {% endif %}
+
+    <!-- Betalingen -->
+    <h2>Betalingen</h2>
+    {% if debiteur.betaling is not empty %}
+        <ul>
+            {% for betaling in debiteur.betaling %}
+                <li>Betaling ID: {{ betaling.id }}, Bedrag: {{ betaling.bedrag }}</li>
+                <a href="{{ path('app_betaling_show', {'id': betaling.id}) }}">Bekijk</a></li>
+                <!-- Voeg hier andere details van de betaling toe -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Er zijn geen betalingen gevonden voor deze debiteur.</p>
+    {% endif %}
+    
+    
+
+    
+
+    <a href="{{ path('app_debiteur_index') }}">terug naar overzicht</a>
+
+    <a href="{{ path('app_debiteur_edit', {'id': debiteur.id}) }}">edit</a>
+
+    {{ include('debiteur/_delete_form.html.twig') }}
+{% endblock %}

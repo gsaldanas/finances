@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Betaling{% endblock %}
+
+{% block body %}
+    <h1>Maak een nieuwe betaling</h1>
+
+    {{ include('betaling/_form.html.twig') }}
+
+    <a href="{{ path('app_betaling_index') }}">Terug naar overzicht</a>
+{% endblock %}

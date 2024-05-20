@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creditnota index{% endblock %}
+
+{% block body %}
+    <h1>Creditnota's overzicht</h1>
+     <a class="btn btn-info text-white" href="{{ path('app_creditnota_new') }}">Nieuw aanmaken</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Referentie</th>
+                <th>Datum</th>
+                <th>Bedrag</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for creditnotum in creditnotas %}
+            <tr>
+                <td>{{ creditnotum.id }}</td>
+                <td>{{ creditnotum.referentie }}</td>
+                <td>{{ creditnotum.datum ? creditnotum.datum|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ creditnotum.bedrag }}</td>
+                <td>
+                    <a href="{{ path('app_creditnota_show', {'id': creditnotum.id}) }}">bekijk</a>
+                    <a href="{{ path('app_creditnota_edit', {'id': creditnotum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

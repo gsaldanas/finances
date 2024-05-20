@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Debiteur{% endblock %}
+
+{% block body %}
+    <h1>Maak een nieuwe Debiteur</h1>
+
+    {{ include('debiteur/_form.html.twig') }}
+
+    <a href="{{ path('app_debiteur_index') }}">Terug naar overzicht</a>
+{% endblock %}

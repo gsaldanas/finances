@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crediteur{% endblock %}
+
+{% block body %}
+    <h1>Crediteur: {{ crediteur.naam }}{{ crediteur.voornaam }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ crediteur.id }}</td>
+            </tr>
+            <tr>
+                <th>Voornaam</th>
+                <td>{{ crediteur.voornaam }}</td>
+            </tr>
+            <tr>
+                <th>Naam</th>
+                <td>{{ crediteur.naam }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ crediteur.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ crediteur.email }}</td>
+            </tr>
+            <tr>
+                <th>Straat_nr</th>
+                <td>{{ crediteur.straatNr }}</td>
+            </tr>
+            <tr>
+                <th>Postcode</th>
+                <td>{{ crediteur.postcode }}</td>
+            </tr>
+            <tr>
+                <th>Gemeente</th>
+                <td>{{ crediteur.gemeente }}</td>
+            </tr>
+            <tr>
+                <th>Land</th>
+                <td>{{ crediteur.land }}</td>
+            </tr>
+            <tr>
+                <th>Btw_nr</th>
+                <td>{{ crediteur.btwNr }}</td>
+            </tr>
+            <tr>
+                <th>Rek_nr</th>
+                <td>{{ crediteur.rekNr }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ crediteur.updatedAt ? crediteur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Facturen van de debiteurs </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Factuur ID</th>
+            <th>Bedrag</th>
+            <th>Datum</th>
+            <th>Debiteur</th>
+            <th>Betaald</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for factuur in crediteur.factuur %}
+            <tr>
+                <td>{{ factuur.id }}</td>
+                <td>{{ factuur.bedrag }}</td>
+                <td>{{ factuur.datum|date('Y-m-d') }}</td>
+                  <td>{{ factuur.debiteur.voornaam }} {{ factuur.debiteur.naam }}</td>
+                <td>{% if factuur.isBetaald %} Ja {% else %} Nee {% endif %}</td>
+               
+                <td><a href="{{ path('app_factuur_show', {'id': factuur.id}) }}">Bekijk</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Geen facturen gevonden.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    <h2>Creditnota's</h2>
+    <ul>
+        {% for creditnota in crediteur.creditnota %}
+            <li>{{ creditnota.id }} - {{ creditnota.bedrag }} - {{ creditnota.datum|date('Y-m-d') }} <a href="{{ path('app_creditnota_show', {'id': creditnota.id}) }}">Bekijk</a></li>
+        {% else %}
+            <li>Geen creditnota's gevonden.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Betalingen</h2>
+    <ul>
+        {% for betaling in crediteur.betaling %}
+            <li>{{ betaling.id }} - {{ betaling.bedrag }} - {{ betaling.datum|date('Y-m-d') }} <a href="{{ path('app_betaling_show', {'id': betaling.id}) }}">Bekijk</a></li>
+        {% else %}
+            <li>Geen betalingen gevonden.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_crediteur_index') }}">terug naar overzicht</a>
+    <a href="{{ path('app_crediteur_edit', {'id': crediteur.id}) }}">edit</a>
+    {{ include('crediteur/_delete_form.html.twig') }}
+{% endblock %}

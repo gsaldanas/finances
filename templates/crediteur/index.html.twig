@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crediteur index{% endblock %}
+
+{% block body %}
+    <h1>Crediteurs overzicht</h1>
+     <a class="btn btn-info text-white" href="{{ path('app_crediteur_new') }}">Nieuwe aanmaken</a>
+    <a class="btn btn-success" href="{{ path('app_crediteur_export_csv') }}">Exporteer naar CSV</a>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'id', 'direction': sort_direction}) }}">Id</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'voornaam', 'direction': sort_direction}) }}">Voornaam</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'naam', 'direction': sort_direction}) }}">Naam</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'tel', 'direction': sort_direction}) }}">Tel</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'email', 'direction': sort_direction}) }}">Email</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'straat_nr', 'direction': sort_direction}) }}">Straat_nr</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'postcode', 'direction': sort_direction}) }}">Postcode</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'gemeente', 'direction': sort_direction}) }}">Gemeente</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'land', 'direction': sort_direction}) }}">Land</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'btw_nr', 'direction': sort_direction}) }}">Btw_nr</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'rek_nr', 'direction': sort_direction}) }}">Rek_nr</a></th>
+                <th><a href="{{ path('app_crediteur_index', {'sort': 'updated_at', 'direction': sort_direction}) }}">Updated_at</a></th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for crediteur in crediteurs %}
+            <tr>
+                <td>{{ crediteur.id }}</td>
+                <td>{{ crediteur.voornaam }}</td>
+                <td>{{ crediteur.naam }}</td>
+                <td>{{ crediteur.tel }}</td>
+                <td>{{ crediteur.email }}</td>
+                <td>{{ crediteur.straatNr }}</td>
+                <td>{{ crediteur.postcode }}</td>
+                <td>{{ crediteur.gemeente }}</td>
+                <td>{{ crediteur.land }}</td>
+                <td>{{ crediteur.btwNr }}</td>
+                <td>{{ crediteur.rekNr }}</td>
+                <td>{{ crediteur.updatedAt ? crediteur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_crediteur_show', {'id': crediteur.id}) }}">bekijk</a>
+                    <a href="{{ path('app_crediteur_edit', {'id': crediteur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

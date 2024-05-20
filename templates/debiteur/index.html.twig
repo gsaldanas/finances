@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Debiteur index{% endblock %}
+
+{% block body %}
+    <h1>Debiteurs overzicht</h1>
+        <a class="btn btn-info text-white" href="{{ path('app_debiteur_new') }}">Nieuwe aanmaken</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'id', 'direction': sort_direction}) }}">Id</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'voornaam', 'direction': sort_direction}) }}">Voornaam</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'naam', 'direction': sort_direction}) }}">Naam</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'tel', 'direction': sort_direction}) }}">Tel</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'email', 'direction': sort_direction}) }}">Email</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'straat_nr', 'direction': sort_direction}) }}">Straat_nr</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'postcode', 'direction': sort_direction}) }}">Postcode</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'gemeente', 'direction': sort_direction}) }}">Gemeente</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'land', 'direction': sort_direction}) }}">Land</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'btw_nr', 'direction': sort_direction}) }}">Btw_nr</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'rek_nr', 'direction': sort_direction}) }}">Rek_nr</a></th>
+                <th><a href="{{ path('app_debiteur_index', {'sort': 'updated_at', 'direction': sort_direction}) }}">Updated_at</a></th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for debiteur in debiteurs %}
+            <tr>
+                <td>{{ debiteur.id }}</td>
+                <td>{{ debiteur.voornaam }}</td>
+                <td>{{ debiteur.naam }}</td>
+                <td>{{ debiteur.tel }}</td>
+                <td>{{ debiteur.email }}</td>
+                <td>{{ debiteur.straatNr }}</td>
+                <td>{{ debiteur.postcode }}</td>
+                <td>{{ debiteur.gemeente }}</td>
+                <td>{{ debiteur.land }}</td>
+                <td>{{ debiteur.btwNr }}</td>
+                <td>{{ debiteur.rekNr }}</td>
+                <td>{{ debiteur.updatedAt ? debiteur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_debiteur_show', {'id': debiteur.id}) }}">bekijk</a>
+                    <a href="{{ path('app_debiteur_edit', {'id': debiteur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

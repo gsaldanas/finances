@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Crediteur{% endblock %}
+
+{% block body %}
+    <h1>Edit Crediteur</h1>
+
+    {{ include('crediteur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_crediteur_index') }}">Terug naar overzicht</a>
+
+    {{ include('crediteur/_delete_form.html.twig') }}
+{% endblock %}

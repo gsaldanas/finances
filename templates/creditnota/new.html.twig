@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Creditnota{% endblock %}
+
+{% block body %}
+    <h1>Maak een nieuwe Creditnota</h1>
+
+    {{ include('creditnota/_form.html.twig') }}
+
+    <a href="{{ path('app_creditnota_index') }}">Terug naar overzicht</a>
+{% endblock %}
